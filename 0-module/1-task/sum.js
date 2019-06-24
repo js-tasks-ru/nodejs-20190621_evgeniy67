@@ -1,5 +1,13 @@
+function _isNumber(value) {
+  return typeof value === 'number';
+}
+
 function sum(a, b) {
-  /* ваш код */
+  if (!_isNumber(a) || !_isNumber(b)) {
+    throw new TypeError('One from arguments don\'t is number');
+  }
+
+  return a + b;
 }
 
 module.exports = sum;
