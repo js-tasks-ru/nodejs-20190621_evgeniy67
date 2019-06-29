@@ -28,7 +28,7 @@ function writeFile(req, res, filepath) {
   req.pipe(streamLimit).pipe(writeStream);
 
   req.on('aborted', () => {
-    cleanUp(filepath, [writeStream, streamLimit]);
+    cleanUp(filepath, [writeStream]);
     res.statusCode = 500;
     res.end('Aborted connect');
   });
@@ -46,6 +46,12 @@ function writeFile(req, res, filepath) {
   }).on('finish', () => {
     res.statusCode = 201;
     res.end('File successfully written');
+  });
+
+  res.on('close', () => {
+    if (res.finished) return;
+    streamLimit.destroy();
+    writeStream.destroy();
   });
 }
 
