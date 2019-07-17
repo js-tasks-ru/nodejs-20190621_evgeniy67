@@ -22,6 +22,7 @@ describe('7-module-1-task', () => {
     });
 
     it('поле usernameField должно должно содержать email', () => {
+      console.log(localStrategy);
       expect(localStrategy._usernameField).to.equal('email');
     });
 
