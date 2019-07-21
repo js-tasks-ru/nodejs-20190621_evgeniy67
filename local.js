@@ -27,7 +27,6 @@ if (!task) {
 const mocha = new Mocha({
   reporter: 'spec',
   useColors: true,
-  timeout: 10000
 });
 
 
