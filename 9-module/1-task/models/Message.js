@@ -6,7 +6,7 @@ const messageSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  
+
   chat: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
@@ -22,6 +22,15 @@ const messageSchema = new mongoose.Schema({
     required: true,
   },
 
+}, {
+  toJSON: {
+    transform: (doc, ret) => {
+      ret.id = ret._id;
+      delete ret._id;
+      delete ret.__v;
+      delete ret.chat;
+    },
+  },
 });
 
 module.exports = connection.model('Message', messageSchema);
